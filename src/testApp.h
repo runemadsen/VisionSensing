@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofxFBOTexture.h"
+#include "boundBox.h"
 
 class testApp : public ofBaseApp{
 	
@@ -20,6 +21,8 @@ public:
 	unsigned char *	withPixels;
 	unsigned char *	withoutPixels;
 	unsigned char *	outputPixels;
+	
+	vector <boundBox> boundBoxList;
 };
 
 #endif	

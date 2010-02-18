@@ -18,7 +18,7 @@ void testApp::setup()
 	withoutPixels = without.getPixels();
 	outputPixels = output.getPixels();
 	
-	int threshold = 20;
+	int threshold = 30;
 	int w = with.width;
 	int h = with.height;
 	int diff;
@@ -38,6 +38,22 @@ void testApp::setup()
 			{
 				counter++;
 				outputPixels[index] = 255;
+				
+				bool foundBox = false;
+				
+				for(int n=0; n<boundBoxList.size(); n++)
+				{
+					if(boundBoxList[n].pointInside(i,j))
+					{
+						foundBox = true;
+						break;
+					}
+				}
+				
+				if (foundBox == false)
+				{
+					boundBoxList.push_back(boundBox(i,j));
+				}
 			}
 			else 
 			{
@@ -64,5 +80,12 @@ void testApp::draw()
 	with.draw(0, 0);
 	without.draw(300, 0);
 	output.draw(600, 0);
+	
+	for( int n=0; n<boundBoxList.size(); n++ )
+	{
+		boundBoxList[n].draw(0,0);
+		boundBoxList[n].draw(300,0);
+		boundBoxList[n].draw(600,0);
+	}
 }
 
